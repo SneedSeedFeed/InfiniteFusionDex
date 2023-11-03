@@ -17,14 +17,8 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Setup Poetry
-        uses: Gr1N/setup-poetry@v8
-
-      - name: Install poetry environment
-        run: poetry install
-
       - name: Run code
-        run: poetry run main.py
+        run: python main.py
 
       - name: Create Release
         id: create_release
