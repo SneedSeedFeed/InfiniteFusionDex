@@ -124,7 +124,7 @@ oricorio_baile = {
         "height": "0.6 m",
         "weight": "3.4 kg",
         "egg": ["Flying"],
-        "ability": [["Dancer", "false"]],
+        "ability": [("Dancer", False)],
         "gender": "25:75"
     },
     "image": {
@@ -158,7 +158,7 @@ oricorio_pom_pom = {
         "height": "0.6 m",
         "weight": "3.4 kg",
         "egg": ["Flying"],
-        "ability": [["Dancer", "false"]],
+        "ability": [("Dancer", False)],
         "gender": "25:75"
     },
     "image": {
@@ -192,7 +192,7 @@ oricorio_pau = {
         "height": "0.6 m",
         "weight": "3.4 kg",
         "egg": ["Flying"],
-        "ability": [["Dancer", "false"]],
+        "ability": [("Dancer", False)],
         "gender": "25:75"
     },
     "image": {
@@ -226,7 +226,7 @@ oricorio_sensu = {
         "height": "0.6 m",
         "weight": "3.4 kg",
         "egg": ["Flying"],
-        "ability": [["Dancer", "false"]],
+        "ability": [("Dancer", False)],
         "gender": "25:75"
     },
     "image": {
@@ -269,6 +269,11 @@ def main():
             if pokemon["id"] >= 252:
                 pokemon["id"] = id_list[pokemon["id"]]
             infinite_dex.append(pokemon)
+
+    infinite_dex.append(oricorio_sensu)
+    infinite_dex.append(oricorio_pau)
+    infinite_dex.append(oricorio_baile)
+    infinite_dex.append(oricorio_pom_pom)
 
     infinite_dex.sort(reverse=False, key=lambda a: a["id"])
     with open("infinite_dex.json", "w", encoding="utf8") as f:
