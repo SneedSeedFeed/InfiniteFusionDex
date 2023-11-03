@@ -264,6 +264,10 @@ def main():
             # Append info about the fusion type
             if pokemon["id"] in fusion_type_overrides:
                 pokemon["fusion_type_override"] = fusion_type_overrides[pokemon["id"]]
+            # Generic check for Normal/Flying types
+            if len(pokemon["type"]) == 2:
+                if pokemon["type"][0] == "Normal" and pokemon["type"][1] == "Flying":
+                    pokemon["fusion_type_override"] = "Flying"
 
             # Change the Natdex ID to the Infinite Dex ID
             if pokemon["id"] >= 252:
