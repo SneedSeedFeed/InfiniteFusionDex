@@ -99,14 +99,6 @@ id_list: dict[int, int] = {
     # Aurorus
     699: 462
 }
-# Ultra necrozma 450_1
-
-## These may need their own special rules put in
-# Oricorio Baile 430
-# Oricorio Pom Pom 431
-# Oricorio Pau 432
-# Oricorio Sensu 433
-
 
 oricorio_baile = {
     "id": 430,
@@ -247,8 +239,45 @@ oricorio_sensu = {
 
 def main():
     import json
-    with open("pokedex.json", "r") as f:
+    from ability_overrides import AbilityOverrides
+    from fusion_type_overrides import FusionTypeOverrides
+    from type_overrides import TypeOverrides
+    with open("pokedex.json", "r", encoding="utf8") as f:
         full_dex = json.load(f)
+
+    infinite_dex = []
+    ability_overrides = AbilityOverrides()
+    type_overrides = TypeOverrides()
+    fusion_type_overrides = FusionTypeOverrides()
+    for pokemon in full_dex:
+        if pokemon["id"] < 252 or pokemon["id"] in id_list.keys():
+            # Modify abilities
+            if pokemon["id"] in ability_overrides:
+                pokemon["profile"]["ability"] = ability_overrides[pokemon["id"]]
+            else:
+                pokemon["profile"]["ability"] = fix_ability(pokemon["profile"]["ability"])
+
+            # Modify types
+            if pokemon["id"] in type_overrides:
+                pokemon["type"] = type_overrides[pokemon["id"]]
+
+            # Append info about the fusion type
+            if pokemon["id"] in fusion_type_overrides:
+                pokemon["fusion_type_override"] = fusion_type_overrides[pokemon["id"]]
+
+            # Change the Natdex ID to the Infinite Dex ID
+            if pokemon["id"] >= 252:
+                pokemon["id"] = id_list[pokemon["id"]]
+            infinite_dex.append(pokemon)
+
+    infinite_dex.sort(reverse=False, key=lambda a: a["id"])
+    with open("infinite_dex.json", "w", encoding="utf8") as f:
+        json.dump(infinite_dex, f, indent=2, ensure_ascii=False)
+
+
+# Just replaces the string "true"/"false" with an actual boolean value
+def fix_ability(abilities: list[list]) -> list[tuple]:
+    return [(ability[0], ability[1] == "true") for ability in abilities]
 
 
 if __name__ == "__main__":
