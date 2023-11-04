@@ -3,7 +3,7 @@ name: Release Dex
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - /src/**/*
       - /Cargo.toml
