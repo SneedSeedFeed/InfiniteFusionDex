@@ -1,6 +1,9 @@
 .idea/
+CustomBattlers/
+/infinite_dex.json
+/infinite_dex.bin
+/__pycache__/
 
 # Added by cargo
 
 /target
-/infinite_dex.json

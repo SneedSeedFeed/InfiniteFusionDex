@@ -40,3 +40,21 @@ jobs:
           asset_path: infinite_dex.json
           asset_name: infinite_dex.json
           asset_content_type: application/json
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Create infinite_dex.bin
+        run: cargo run --release
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: infinite_dex.bin
+          asset_name: infinite_dex.bin
+          asset_content_type: application/octet-stream
