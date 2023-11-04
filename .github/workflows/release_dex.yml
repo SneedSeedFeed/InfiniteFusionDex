@@ -1,0 +1,69 @@
+name: Release Dex
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - /src/**/*
+      - /Cargo.toml
+      - /.github/workflows/release_dex.yml
+      - ability_overrides.py
+      - fusion_type_overrides.py
+      - main.py
+      - type_overrides.py
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: Run code
+        run: python main.py
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: infinite_dex.json
+          asset_name: infinite_dex.json
+          asset_content_type: application/json
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Create infinite_dex.bin
+        run: cargo run --release
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: infinite_dex.bin
+          asset_name: infinite_dex.bin
+          asset_content_type: application/octet-stream
