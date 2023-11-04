@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - README.md
-      - LICENSE
-      - .gitignore
+    paths:
+      - /src/**/*
+      - /Cargo.toml
+      - /.github/workflows/release_dex.yml
+      - ability_overrides.py
+      - fusion_type_overrides.py
+      - main.py
+      - type_overrides.py
 
 jobs:
   build:
