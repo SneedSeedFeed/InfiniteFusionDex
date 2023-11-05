@@ -281,7 +281,7 @@ lycanrock_midday = {
 lycanroc_midnight = {
     "id": 464,
     "name": {
-      "english": "Lycanroc Midday",
+      "english": "Lycanroc Midnight",
       "japanese": "ルガルガン",
       "chinese": "鬃岩狼人",
       "french": "Lougaroc"
