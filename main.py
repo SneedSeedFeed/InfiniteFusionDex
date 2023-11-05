@@ -97,7 +97,11 @@ id_list: dict[int, int] = {
     # Amaura
     698: 461,
     # Aurorus
-    699: 462
+    699: 462,
+    # Rockruff
+    744: 463
+    # Lycanroc
+    # Has seperate forms like oricorio so special rules time
 }
 
 oricorio_baile = {
@@ -236,6 +240,82 @@ oricorio_sensu = {
     }
 }
 
+lycanrock_midday = {
+    "id": 464,
+    "name": {
+      "english": "Lycanroc Midday",
+      "japanese": "ルガルガン",
+      "chinese": "鬃岩狼人",
+      "french": "Lougaroc"
+    },
+    "type": ["Rock"],
+    "base": {
+      "HP": 85,
+      "Attack": 115,
+      "Defense": 75,
+      "Sp. Attack": 55,
+      "Sp. Defense": 75,
+      "Speed": 82
+    },
+    "species": "Wolf Pokémon",
+    "description": "The rocks in its mane are sharper than a knife. Fragments that break off are treasured as good luck charms.",
+    "evolution": { "prev": ["744", "Level 25"] },
+    "profile": {
+      "height": "0.8 m",
+      "weight": "25 kg",
+      "egg": ["Field"],
+      "ability": [
+        ("Keen Eye", False),
+        ("Sand Rush", False),
+        ("Steadfast", True)
+      ],
+      "gender": "50:50"
+    },
+    "image": {
+      "sprite": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/sprites/745.png",
+      "thumbnail": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/thumbnails/745.png",
+      "hires": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/hires/745.png"
+    }
+  }
+
+lycanroc_midnight = {
+    "id": 464,
+    "name": {
+      "english": "Lycanroc Midday",
+      "japanese": "ルガルガン",
+      "chinese": "鬃岩狼人",
+      "french": "Lougaroc"
+    },
+    "type": ["Rock"],
+    "base": {
+      "HP": 75,
+      "Attack": 115,
+      "Defense": 65,
+      "Sp. Attack": 55,
+      "Sp. Defense": 65,
+      "Speed": 112
+    },
+    "species": "Wolf Pokémon",
+    "description": "They live alone without forming packs. They will only listen to orders from Trainers who can draw out their true power.",
+    "evolution": { "prev": ["744", "Level 25"] },
+    "profile": {
+      "height": "1.1 m",
+      "weight": "25 kg",
+      "egg": ["Field"],
+      "ability": [
+        ("Keen Eye", False),
+        ("Vital Spirit", False),
+        ("No Guard", True)
+      ],
+      "gender": "50:50"
+    },
+    "image": {
+      "sprite": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/sprites/745.png",
+      "thumbnail": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/thumbnails/745.png",
+      "hires": "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/images/pokedex/hires/745.png"
+    }
+  }
+
 
 def main():
     import json
@@ -278,6 +358,8 @@ def main():
     infinite_dex.append(oricorio_pau)
     infinite_dex.append(oricorio_baile)
     infinite_dex.append(oricorio_pom_pom)
+    infinite_dex.append(lycanroc_midnight)
+    infinite_dex.append(lycanrock_midday)
 
     infinite_dex.sort(reverse=False, key=lambda a: a["id"])
     with open("infinite_dex.json", "w", encoding="utf8") as f:
