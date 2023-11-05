@@ -363,7 +363,7 @@ def main():
 
     infinite_dex.sort(reverse=False, key=lambda a: a["id"])
     with open("infinite_dex.json", "w", encoding="utf8") as f:
-        json.dump(infinite_dex, f, indent=2, ensure_ascii=False)
+        json.dump(infinite_dex, f, ensure_ascii=False)
 
 
 # Just replaces the string "true"/"false" with an actual boolean value
